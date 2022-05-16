@@ -30,10 +30,12 @@ at the top of the script you will see 4 varibles
             - app passwords
             - allow for mail
             - copy your app password and place it in the password string
+
     toEmail
         - place your destination email address. Remember you can also email a text message.
             - att      = number@txt.att.net
             - t mobile = number@tmomail.net
             - verizon  = number@vtext.com
+            
     check_minutes
         - this varible will pause this script in minutes. Default is set to 10
