@@ -20,9 +20,8 @@ Before you begin
 at the top of the script you will see 4 varibles
 
     fromEmail
-
         - put your gmail email address in this string. The script will log into this account.
-        
+
     password
         - put your gmail password in this string. Make sure it is an app password set up for mail.
             - go to manage your google account
