@@ -17,7 +17,7 @@ Before you begin
 
 
 # Set ubiquiti.py varibles
-1. at the top of the script you will see 4 varibles
+at the top of the script you will see 4 varibles
     fromEmail
         - put your gmail email address in this string. The script will log into this account.
     password
