@@ -99,13 +99,17 @@ def console_out_end():
 
 # checks if the stock has changed for a device and updates its value
 def update_stock(device):
-    page = requests.get(device.link)
-    soup = BeautifulSoup(page.content, "html.parser")
-    results = soup.find(id="titleInStockBadge")
-    if ('In-Stock' in str(results)):
-        device.in_stock = True
-    else:
-        device.in_stock = False
+    try:
+        page = requests.get(device.link)
+        soup = BeautifulSoup(page.content, "html.parser")
+        results = soup.find(id="titleInStockBadge")
+        if ('In-Stock' in str(results)):
+            device.in_stock = True
+        else:
+            device.in_stock = False
+    except:
+        device.in_stock = "network error"
+    
 
 # main loop
 def main_loop():
