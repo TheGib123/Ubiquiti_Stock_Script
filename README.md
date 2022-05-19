@@ -13,17 +13,17 @@ Before you begin
 
 3. Save the file and close
 
-4. Run ubiquiti.py
-
 
 # Set ubiquiti.py varibles
-at the top of the script you will see 4 varibles
+at the top of the script you will see 4 variables
+
+    I recommend setting up a burner Gmail account for this step
 
     fromEmail
-        - put your gmail email address in this string. The script will log into this account.
+        - put your Gmail email address in this string. The script will log into this account.
 
     password
-        - put your gmail password in this string. Make sure it is an app password set up for mail.
+        - put your Gmail password in this string. Make sure it is an app password set up for mail.
             - go to manage your google account
             - Security
             - signing in to google
@@ -38,4 +38,6 @@ at the top of the script you will see 4 varibles
             - verizon  = number@vtext.com
             
     check_minutes
-        - this varible will pause this script in minutes. Default is set to 10
+        - this variable will pause this script in minutes. Default is set to 10
+
+RUN ubiquiti.py
