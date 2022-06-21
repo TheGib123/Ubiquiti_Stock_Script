@@ -103,7 +103,7 @@ def update_stock(device):
         page = requests.get(device.link)
         soup = BeautifulSoup(page.content, "html.parser")
         results = soup.find(id="titleInStockBadge")
-        if ('In-Stock' in str(results)):
+        if (results != None):
             device.in_stock = True
         else:
             device.in_stock = False
