@@ -7,7 +7,7 @@ import time
 
 fromEmail = 'yourEmail@gmail.com'
 password = 'applicaionPassword'
-toEmail = 'destinationEmail'
+toEmails = ['destinationEmail', 'destinationEmail2']
 check_minutes = 10                  # Pause minutes for the script
 
 
@@ -36,16 +36,17 @@ def send_email(device):
     s.starttls()
     s.login(fromEmail, password)
     message = f"""\
-    Subject: in stock : {device.name} 
+From: <{fromEmail}>
+To: <{','.join(toEmails)}>
+Subject: In Stock : {device.name} 
 
-    device:
-    {device.name}
+device:
+{device.name}
 
-    link:
-    {device.link}
-
-    This message is sent from Python."""
-    s.sendmail(fromEmail, toEmail, message)
+link:
+{device.link}
+"""
+    s.sendmail(fromEmail, toEmails, message)
     s.quit()
 
 # sends a test email to make sure it is working correctly
@@ -53,15 +54,16 @@ def send_test_email():
     s = smtplib.SMTP('smtp.gmail.com', 587)
     s.starttls()
     s.login(fromEmail, password)
-    message = """\
-    Subject: ubiquiti stock tool
+    message = f"""\
+From: <{fromEmail}>
+To: <{','.join(toEmails)}>
+Subject: Ubiquiti stock tool
 
-    Test email for ubiquiti stock tool.
-    If you are seeing this the email part of the script
-    is working correctly.
-
-    This message is sent from Python."""
-    s.sendmail(fromEmail, toEmail, message)
+Test email for ubiquiti stock tool.
+If you are seeing this the email part of the script
+is working correctly.
+"""   
+    s.sendmail(fromEmail, toEmails, message)
     s.quit()
 
 # logs information when ever the device is in stock
