@@ -4,11 +4,12 @@ import csv
 from datetime import datetime
 import smtplib
 import time
+import traceback
 
 fromEmail = 'yourEmail@gmail.com'
 password = 'applicaionPassword'
 toEmails = ['destinationEmail', 'destinationEmail2']
-check_minutes = 10                  # Pause minutes for the script
+check_minutes = 5                  # Pause minutes for the script
 
 
 
@@ -62,6 +63,22 @@ Subject: Ubiquiti stock tool
 Test email for ubiquiti stock tool.
 If you are seeing this the email part of the script
 is working correctly.
+"""   
+    s.sendmail(fromEmail, toEmails, message)
+    s.quit()
+
+# sends a email if the script failed
+def send_failure_email(error):
+    s = smtplib.SMTP('smtp.gmail.com', 587)
+    s.starttls()
+    s.login(fromEmail, password)
+    message = f"""\
+From: <{fromEmail}>
+To: <{','.join(toEmails)}>
+Subject: Ubiquiti stock tool
+
+Ubiquiti script crashed see error below
+{error}
 """   
     s.sendmail(fromEmail, toEmails, message)
     s.quit()
@@ -133,7 +150,10 @@ def main_loop():
 print('Ubiquiti script now running')
 read_file()
 send_test_email()
-main_loop()
 
-
+try:
+    main_loop()
+except Exception as e:
+    send_failure_email(str(e))
+    print(traceback.format_exc())
 
