@@ -5,6 +5,7 @@ from datetime import datetime
 import smtplib
 import time
 import traceback
+import pytz
 
 fromEmail = 'yourEmail@gmail.com'
 password = 'applicaionPassword'
@@ -68,7 +69,7 @@ is working correctly.
     s.quit()
 
 # sends a email if the script failed
-def send_failure_email(error):
+def send_failure_email(error, trace_error):
     s = smtplib.SMTP('smtp.gmail.com', 587)
     s.starttls()
     s.login(fromEmail, password)
@@ -79,13 +80,15 @@ Subject: Ubiquiti stock tool
 
 Ubiquiti script crashed see error below
 {error}
+{trace_error}
 """   
     s.sendmail(fromEmail, toEmails, message)
     s.quit()
 
 # logs information when ever the device is in stock
 def log_info(device):
-    time = datetime.now()
+    mytz = pytz.timezone('America/Chicago')
+    time = datetime.now(tz=mytz)
     time = time.strftime("%m/%d/%Y %I:%M:%S %p")
     f = open("email_log.txt", "a")
     f.write(str(device.name) + " in stock\n")
@@ -96,7 +99,8 @@ def log_info(device):
 
 # outputs the date and time
 def console_out_begin():
-    time = datetime.now()
+    mytz = pytz.timezone('America/Chicago')
+    time = datetime.now(tz=mytz)
     time = time.strftime("%m/%d/%Y %I:%M:%S %p")
     f = open("console_out.txt", "a")
     f.write(str(time) + '\n\n')
@@ -154,6 +158,5 @@ send_test_email()
 try:
     main_loop()
 except Exception as e:
-    send_failure_email(str(e))
-    print(traceback.format_exc())
+    send_failure_email(str(e), traceback.format_exc())
 
