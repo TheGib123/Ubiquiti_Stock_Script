@@ -1,6 +1,6 @@
 # Ubiquiti_Stock_Script
  
-Before you begin
+This tool was made to check if a device is in stock in the ubiquiti store. Since ubiquiti is having issues keeping devices in stock this tool can help notify you when a specified device becomes availible. 
 
 # Set up devices.csv
 1. create a file named (devices.csv) and place it in the same directory as (ubiquiti.py)
